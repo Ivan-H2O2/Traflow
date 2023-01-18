@@ -26,9 +26,16 @@
       有任何有问题，请联系我们：<br>
     </p>
     <p class="text_column">&nbsp;</p>
-    <p class="text_column">联系人：郭明旻<br>
-邮箱：mmguo@fudan.edu.cn</p>
+    <p class="text_column">联系人：郭明旻<br>邮箱：mmguo@fudan.edu.cn</p>
+    <h2 class="navi">选择仿真对象</h2>
+    <p class="LinearCarHealModel">1.跟驰模型</p>
   </section>
+
+  <!-- <section class="navi" id="navi">
+    <h2>选择仿真对象</h2>
+    <p class="LinearCarHealModel">跟车模型</p>
+  </section> -->
+
   <!-- Stats Gallery Section -->
   <!-- Parallax Section -->
   <!-- More Info Section -->
@@ -38,6 +45,7 @@
     <p class="hero_header">FOR THE LATEST NEWS &amp; UPDATES</p>
     <div class="button">subscribe</div>
   </section>
+
   <!-- Copyrights Section -->
   <div class="copyright">&copy;2022 - <strong>FDU</strong></div>
 </div>
@@ -563,6 +571,10 @@ nav ul li {
 	margin-top: 0px;
 	padding-top: 0px;
 }
+}
+
+.navi {
+  
 }
 
 </style>

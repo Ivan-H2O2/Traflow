@@ -1,6 +1,7 @@
 <template>
-  <!-- <div>Hello</div> -->
-  <el-button>Hello</el-button>
+  <div style="padding: 10px">
+    <el-button>Hello</el-button>
+  </div>
 </template>
 
 <script>

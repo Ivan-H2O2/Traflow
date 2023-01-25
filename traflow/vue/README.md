@@ -1,5 +1,9 @@
 # traflow
 
+## Author
+
+Ivan & H2O2
+
 ## Project setup
 ```
 npm install

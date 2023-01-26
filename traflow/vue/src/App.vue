@@ -9,7 +9,7 @@
       <!-- 侧边栏 -->
       <Aside />
       <!-- 内容区域 -->
-      <router-view />
+      <router-view style="flex: 1" />
     </div>
   </div>
 </template>

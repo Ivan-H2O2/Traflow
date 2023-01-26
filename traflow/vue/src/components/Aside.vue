@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="name">
     <el-row class="tac">
       <el-col :span="12">
         <el-menu
@@ -14,13 +14,27 @@
         >
           <el-menu-item index="1">
             <el-icon><icon-menu /></el-icon>
-            <span>主页</span>
+            <span>
+              <router-link
+                class="list-group-item"
+                active-class="active"
+                to="/home"
+                >主页</router-link
+              ></span
+            >
           </el-menu-item>
           <!-- 禁用disabled的话可以这样写 -->
           <!-- <el-menu-item index="3"> disabled     -->
           <el-menu-item index="2">
-            <el-icon><document /></el-icon>
-            <span>关于</span>
+            <el-icon><icon-menu /></el-icon>
+            <span>
+              <router-link
+                class="list-group-item"
+                active-class="active"
+                to="/table"
+                >测试表格</router-link
+              ></span
+            >
           </el-menu-item>
           <el-sub-menu index="3">
             <template #title>
@@ -43,3 +57,10 @@ export default {
   name: "MyAside",
 };
 </script>
+
+<style scoped>
+.list-group-item {
+  /* 去掉下划线 */
+  text-decoration-line: none;
+}
+</style>

@@ -1,10 +1,10 @@
-// 该文件用于理解前后端的交互
+// 该文件通过表格理解前后端的交互
 <template>
   <!-- 表格表头 -->
   <div style="padding: 10px">
     <!-- 功能区域 -->
     <div style="margin: 10px 0">
-      <el-button type="primary">新增</el-button>
+      <el-button type="primary" @click="add">新增</el-button>
       <el-button type="primary">导入</el-button>
       <el-button type="primary">导出</el-button>
     </div>
@@ -19,9 +19,11 @@
     </div>
     <!-- border: 边框  stripe: 斑马纹 -->
     <el-table :data="tableData" border stripe style="width: 100%">
-      <el-table-column prop="date" label="Date" width="180" sortable />
-      <el-table-column prop="name" label="Name" width="180" sortable />
-      <el-table-column prop="address" label="Address" sortable />
+      <el-table-column prop="id" label="ID" width="180" sortable />
+      <el-table-column prop="username" label="UserName" width="180" sortable />
+      <el-table-column prop="nickName" label="NickName" sortable />
+      <el-table-column prop="age" label="Age" sortable />
+      <el-table-column prop="sex" label="Sex" sortable />
       <el-table-column fixed="right" label="Operations" width="120">
         <template #default>
           <el-button link type="primary" @click="handleEdit">Edit</el-button>
@@ -48,6 +50,29 @@
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
       />
+    </div>
+    <div>
+      <el-form :model="form" label-width="120px">
+        <el-form-item label="Activity name">
+          <el-input v-model="form.name" />
+        </el-form-item>
+      </el-form>
+      <el-dialog
+        v-model="dialogVisible"
+        title="Tips"
+        width="30%"
+        :before-close="handleClose"
+      >
+        <span>This is a message</span>
+        <template #footer>
+          <span class="dialog-footer">
+            <el-button @click="dialogVisible = false">Cancel</el-button>
+            <el-button type="primary" @click="dialogVisible = false">
+              Confirm
+            </el-button>
+          </span>
+        </template>
+      </el-dialog>
     </div>
   </div>
 </template>
@@ -76,8 +101,8 @@ const tableData = [
     address: "No. 189, Grove St, Los Angeles",
   },
 ];
-import { ref } from "vue";
 
+import { ref } from "vue";
 // const currentPage1 = ref(5);
 // const currentPage2 = ref(5);
 // const currentPage3 = ref(5);
@@ -88,12 +113,13 @@ const pageSize4 = ref(20);
 const small = ref(false);
 const background = ref(false);
 const disabled = ref(false);
-
 // const handleSizeChange = (val: number) => {
 //   console.log(`${val} items per page`);
 // };
 // const handleCurrentChange = (val: number) => {
 //   console.log(`current page: ${val}`);
 // };
+
+function add() {}
 function handleEdit() {}
 </script>

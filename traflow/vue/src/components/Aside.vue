@@ -42,8 +42,8 @@
               <span>选择仿真模型</span>
             </template>
             <el-menu-item-group title="跟车模型">
-              <el-menu-item index="1-1">仿真1</el-menu-item>
-              <el-menu-item index="1-2">仿真2</el-menu-item>
+              <el-menu-item index="3-1">仿真1</el-menu-item>
+              <el-menu-item index="3-2">仿真2</el-menu-item>
             </el-menu-item-group>
           </el-sub-menu>
         </el-menu>

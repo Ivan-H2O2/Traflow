@@ -52,11 +52,11 @@
       />
     </div>
     <div>
-      <el-form :model="form" label-width="120px">
+      <!-- <el-form :model="form" label-width="120px">
         <el-form-item label="Activity name">
           <el-input v-model="form.name" />
         </el-form-item>
-      </el-form>
+      </el-form> -->
       <el-dialog
         v-model="dialogVisible"
         title="Tips"

@@ -101,6 +101,36 @@
 </template>
 
 <script scope>
+import request from "@/utils/request";
+export default {
+  name: "TableView",
+  components: {},
+  data() {
+    return {
+      form: {},
+      dialogVisible: false,
+      search: "",
+      currentPage: 1,
+      total: 10,
+      tableData: [],
+    };
+  },
+  methods: {
+    add() {
+      this.dialogVisible = true;
+      this.form = {};
+    },
+    save() {
+      this.dialogVisible = false;
+      request.post("/user", this.form).then((res) => {
+        console.log(res);
+      }); // 来自后端UserController.java里面的地址 //this.form是请求参数
+      // 用axios实现数据交互
+    },
+    handleEdit() {},
+    handleDelete() {},
+  },
+};
 // import { ref } from "vue";
 // 表格数据
 // const tableData = [
@@ -144,30 +174,4 @@
 
 // function add() {}
 // function handleEdit() {}
-export default {
-  name: "TableView",
-  components: {},
-  data() {
-    return {
-      form: {},
-      dialogVisible: false,
-      search: "",
-      currentPage: 1,
-      total: 10,
-      tableData: [],
-    };
-  },
-  methods: {
-    add() {
-      this.dialogVisible = true;
-      this.form = {};
-    },
-    save() {
-      this.dialogVisible = false;
-      // 用axios实现数据交互
-    },
-    handleEdit() {},
-    handleDelete() {},
-  },
-};
 </script>

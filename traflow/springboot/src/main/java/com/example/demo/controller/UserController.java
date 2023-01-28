@@ -16,7 +16,7 @@ import javax.annotation.Resource;
  * @since 2023-01-27 18:10:21
  */
 @RestController
-@RequestMapping("user")
+@RequestMapping("/user")//和前端的接口相呼应
 public class UserController {
     /**
      * 服务对象

@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-
+//前端可以把数据传过来
 /**
  * 用户信息表(User)表控制层
  *
@@ -53,6 +53,7 @@ public class UserController {
      * @param user 实体
      * @return 新增结果
      */
+
     @PostMapping
     public ResponseEntity<User> add(User user) {
         return ResponseEntity.ok(this.userService.insert(user));

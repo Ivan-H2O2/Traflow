@@ -12,30 +12,24 @@
           @open="handleOpen"
           @close="handleClose"
         >
-          <el-menu-item index="1">
-            <el-icon><icon-menu /></el-icon>
-            <span>
-              <router-link
-                class="list-group-item"
-                active-class="active"
-                to="/home"
-                >主页</router-link
-              ></span
-            >
-          </el-menu-item>
+          <router-link class="list-group-item" active-class="active" to="/home">
+            <el-menu-item index="1">
+              <el-icon><icon-menu /></el-icon>
+              <span> 主页</span>
+            </el-menu-item>
+          </router-link>
           <!-- 禁用disabled的话可以这样写 -->
           <!-- <el-menu-item index="3"> disabled     -->
-          <el-menu-item index="2">
-            <el-icon><icon-menu /></el-icon>
-            <span>
-              <router-link
-                class="list-group-item"
-                active-class="active"
-                to="/table"
-                >测试表格</router-link
-              ></span
-            >
-          </el-menu-item>
+          <router-link
+            class="list-group-item"
+            active-class="active"
+            to="/table"
+          >
+            <el-menu-item index="2">
+              <el-icon><icon-menu /></el-icon>
+              <span> 测试表格</span>
+            </el-menu-item>
+          </router-link>
           <el-sub-menu index="3">
             <template #title>
               <el-icon><location /></el-icon>

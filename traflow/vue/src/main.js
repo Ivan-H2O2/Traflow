@@ -15,3 +15,8 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component);
 }
 createApp(App).use(store).use(ElementPlus).use(router).mount("#app");
+
+//引入axios依赖
+import axios from "axios";
+//让请求携带上浏览器的cookie
+axios.defaults.withCredentials = true;

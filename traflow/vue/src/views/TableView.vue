@@ -92,7 +92,7 @@
         <template #footer>
           <span class="dialog-footer">
             <el-button @click="dialogVisible = false">Cancel</el-button>
-            <el-button type="primary" @click="save"> Confirm </el-button>
+            <el-button type="primary" @click="save_cors"> Confirm </el-button>
           </span>
         </template>
       </el-dialog>
@@ -102,6 +102,7 @@
 
 <script scope>
 import request from "@/utils/request";
+import axios from "axios";
 export default {
   name: "TableView",
   components: {},
@@ -121,11 +122,21 @@ export default {
       this.form = {};
     },
     save() {
-      this.dialogVisible = false;
       request.post("/user", this.form).then((res) => {
         console.log(res);
       }); // 来自后端UserController.java里面的地址 //this.form是请求参数
       // 用axios实现数据交互
+      this.dialogVisible = false;
+    },
+    save_cors() {
+      // 另一种访问后端的方法
+      // const _this = this;
+      axios.get("http://localhost:9009/user/find").then(function (res) {
+        ///console.log(resp.data);
+        console.log(res);
+        this.form = res.data;
+        this.dialogVisible = false;
+      });
     },
     handleEdit() {},
     handleDelete() {},

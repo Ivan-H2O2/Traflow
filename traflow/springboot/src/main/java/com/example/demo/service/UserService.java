@@ -8,7 +8,7 @@ import org.springframework.data.domain.PageRequest;
  * 用户信息表(User)表服务接口
  *
  * @author makejava
- * @since 2023-01-27 18:10:21
+ * @since 2023-01-29 22:22:59
  */
 public interface UserService {
 

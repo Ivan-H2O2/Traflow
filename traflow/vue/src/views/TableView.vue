@@ -69,6 +69,9 @@
           <el-form-item label="Nickname">
             <el-input v-model="form.nickname" style="width: 80%" />
           </el-form-item>
+          <el-form-item label="Password">
+            <el-input v-model="form.password" style="width: 80%" />
+          </el-form-item>
           <el-form-item label="Age">
             <el-input v-model="form.age" style="width: 80%" />
           </el-form-item>
@@ -92,7 +95,7 @@
         <template #footer>
           <span class="dialog-footer">
             <el-button @click="dialogVisible = false">Cancel</el-button>
-            <el-button type="primary" @click="save_cors"> Confirm </el-button>
+            <el-button type="primary" @click="save"> Confirm </el-button>
           </span>
         </template>
       </el-dialog>
@@ -101,7 +104,7 @@
 </template>
 
 <script scope>
-import request from "@/utils/request";
+// import request from "@/utils/request";
 import axios from "axios";
 export default {
   name: "TableView",
@@ -122,22 +125,23 @@ export default {
       this.form = {};
     },
     save() {
-      request.post("/user", this.form).then((res) => {
+      // 下面的axios本来是request，但是由于request.js被注释掉了，所以换一种
+      axios.post("http://localhost:9090/user/", this.form).then((res) => {
         console.log(res);
       }); // 来自后端UserController.java里面的地址 //this.form是请求参数
       // 用axios实现数据交互
       this.dialogVisible = false;
     },
-    save_cors() {
-      // 另一种访问后端的方法
-      // const _this = this;
-      axios.get("http://localhost:9009/user/find").then(function (res) {
-        ///console.log(resp.data);
-        console.log(res);
-        this.form = res.data;
-        this.dialogVisible = false;
-      });
-    },
+    // save_cors() {
+    //   // 另一种访问后端的方法,用于测试
+    //   // const _this = this;
+    //   axios.get("http://localhost:9090/user/").then(function (res) {
+    //     ///console.log(resp.data);
+    //     console.log(res);
+    //     this.form = res.data;
+    //     this.dialogVisible = false;
+    //   });
+    // },
     handleEdit() {},
     handleDelete() {},
   },

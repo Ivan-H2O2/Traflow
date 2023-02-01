@@ -1,7 +1,6 @@
 package com.example.demo.dao;
 
 import com.example.demo.entity.User;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.data.domain.Pageable;
 
@@ -11,9 +10,8 @@ import java.util.List;
  * 用户信息表(User)表数据库访问层
  *
  * @author makejava
- * @since 2023-01-27 18:10:21
+ * @since 2023-01-29 22:22:59
  */
-@Mapper
 public interface UserDao {
 
     /**

@@ -30,14 +30,17 @@
       <el-table-column prop="age" label="Age" sortable />
       <el-table-column prop="sex" label="Sex" sortable />
       <el-table-column fixed="right" label="Operations" width="120">
-        <template #default>
+        <template #default="scope">
           <el-button link type="primary" @click="handleEdit(scope.row)"
             >Edit</el-button
           >
           <!-- 反馈组件 -->
-          <el-popconfirm title="Are you sure to delete this?">
+          <el-popconfirm
+            title="Are you sure to delete this?"
+            @confirm="handleDelete(scope.row.id)"
+          >
             <template #reference>
-              <el-button type="text">Delete</el-button>
+              <el-button link type="Danger">Delete</el-button>
             </template>
           </el-popconfirm>
         </template>
@@ -156,12 +159,54 @@ export default {
     },
     // 新建一个字段到数据库
     save() {
-      // 下面的axios本来是request，但是由于request.js被注释掉了，所以换一种
-      request.post("user/", this.form).then((res) => {
-        console.log(res);
-      }); // 来自后端UserController.java里面的地址 //this.form是请求参数
-      // 用axios实现数据交互
+      if (this.form.id) {
+        // 如果有id更新
+        request.put("user/", this.form).then((res) => {
+          console.log(res);
+        });
+        this.$message({
+          type: "success",
+          message: "edit successed!",
+        });
+        // BUG 以下代码是判断是否成功，但是BUG是res undefined
+        // if (res.code === "0") {
+        //   this.$message({
+        //     type: "success",
+        //     message: "edit successed!",
+        //   });
+        // } else {
+        //   this.$message({
+        //     type: "error",
+        //     message: res.message,
+        //   });
+        // }
+      } else {
+        // 如果没有id新增一个
+        // 下面的axios本来是request，但是由于request.js被注释掉了，所以换一种
+        request.post("user/", this.form).then((res) => {
+          console.log(res);
+        }); // 来自后端UserController.java里面的地址 //this.form是请求参数
+        // 如果保存成功则弹窗显示
+        this.$message({
+          type: "success",
+          message: "save successed!",
+        });
+        // BUG 以下代码是判断是否成功，但是BUG是res undefined
+        // if (res.code === "0") {
+        //   this.$message({
+        //     type: "success",
+        //     message: "save successed!",
+        //   });
+        // } else {
+        //   this.$message({
+        //     type: "error",
+        //     message: res.message,
+        //   });
+        // }
+      }
+
       this.dialogVisible = false;
+      this.load(); // 刷新页面 实时显示
     },
     // save_cors() {
     //   // 另一种访问后端的方法,用于测试
@@ -177,7 +222,22 @@ export default {
       this.form = JSON.parse(JSON.stringify(row)); // 深拷贝
       this.dialogVisible = true;
     },
-    handleDelete() {},
+    handleDelete(id) {
+      console.log(id);
+      request.delete("user/" + id).then(() => {
+        this.$message({
+          type: "success",
+          message: "delete successed!",
+        });
+        this.load();
+      });
+    },
+    handleSizeChange() {
+      this.load();
+    }, // 改变当前每页的个数触发
+    handleCurrentChange() {
+      this.load();
+    }, // 改变当前页码触发
   },
 };
 // import { ref } from "vue";

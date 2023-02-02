@@ -7,7 +7,7 @@
           active-text-color="#0022ee"
           background-color="#fff"
           class="el-menu-vertical-demo"
-          default-active="2"
+          default-active="1"
           text-color="#000"
           @open="handleOpen"
           @close="handleClose"

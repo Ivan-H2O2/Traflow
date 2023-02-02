@@ -9,13 +9,17 @@
       <el-button type="primary">导出</el-button>
     </div>
     <!-- 搜索区域 -->
+    <!-- clearable是清空的按钮  -->
     <div style="margin: 10px 0">
       <el-input
         v-model="search"
         placeholder="Please input"
         style="width: 20%"
+        clearable
       />
-      <el-button type="primary" plain style="margin: 5px">查询</el-button>
+      <el-button type="primary" plain style="margin: 5px" @click="load"
+        >查询</el-button
+      >
     </div>
     <!-- border: 边框  stripe: 斑马纹 -->
     <!-- label的规则：首字母大写  | 属性的规则：全部小写   驼峰？-->
@@ -27,7 +31,9 @@
       <el-table-column prop="sex" label="Sex" sortable />
       <el-table-column fixed="right" label="Operations" width="120">
         <template #default>
-          <el-button link type="primary" @click="handleEdit">Edit</el-button>
+          <el-button link type="primary" @click="handleEdit(scope.row)"
+            >Edit</el-button
+          >
           <!-- 反馈组件 -->
           <el-popconfirm title="Are you sure to delete this?">
             <template #reference>
@@ -41,14 +47,15 @@
       <div class="demonstration">All combined</div>
       <!-- 下面两行的报错似乎不影响整体 -->
       <el-pagination
-        v-model:current-page="currentPage4"
-        v-model:page-size="pageSize4"
+        v-model:current-page="currentPage"
+        v-model:page-size="pageSize"
         :page-sizes="[5, 10, 15, 20]"
+        :page-size="pageSize"
         :small="small"
         :disabled="disabled"
         :background="background"
         layout="total, sizes, prev, pager, next, jumper"
-        :total="20"
+        :total="total"
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
       />
@@ -67,7 +74,7 @@
             <el-input v-model="form.username" style="width: 80%" />
           </el-form-item>
           <el-form-item label="Nickname">
-            <el-input v-model="form.nickname" style="width: 80%" />
+            <el-input v-model="form.nickName" style="width: 80%" />
           </el-form-item>
           <el-form-item label="Password">
             <el-input v-model="form.password" style="width: 80%" />
@@ -104,8 +111,8 @@
 </template>
 
 <script scope>
-// import request from "@/utils/request";
-import axios from "axios";
+import request from "@/utils/request";
+// import axios from "axios";
 export default {
   name: "TableView",
   components: {},
@@ -115,18 +122,42 @@ export default {
       dialogVisible: false,
       search: "",
       currentPage: 1,
-      total: 10,
+      pageSize: 10,
+      total: 0,
       tableData: [],
     };
   },
+  // 页面加载的时候直接调用
+  created() {
+    this.load();
+  },
   methods: {
+    // 添加
     add() {
       this.dialogVisible = true;
       this.form = {};
     },
+    // 加载
+    load() {
+      request
+        .get("/user", {
+          params: {
+            // 查询
+            pageNum: this.currentPage,
+            pageSize: this.pageSize,
+            search: this.search,
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          this.tableData = res.data.records; // 每一条数据
+          this.total = res.data.total; // 总条数
+        });
+    },
+    // 新建一个字段到数据库
     save() {
       // 下面的axios本来是request，但是由于request.js被注释掉了，所以换一种
-      axios.post("http://localhost:9090/user/", this.form).then((res) => {
+      request.post("user/", this.form).then((res) => {
         console.log(res);
       }); // 来自后端UserController.java里面的地址 //this.form是请求参数
       // 用axios实现数据交互
@@ -142,7 +173,10 @@ export default {
     //     this.dialogVisible = false;
     //   });
     // },
-    handleEdit() {},
+    handleEdit(row) {
+      this.form = JSON.parse(JSON.stringify(row)); // 深拷贝
+      this.dialogVisible = true;
+    },
     handleDelete() {},
   },
 };

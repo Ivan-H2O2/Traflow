@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 //启动类
-@ComponentScan(basePackages = {"com.example.demo.dao"})//防止dao层没被扫到
+//@ComponentScan(basePackages = {"com.example.demo.dao"})//防止dao层没被扫到
 @MapperScan("com.example.demo.dao")
 @SpringBootApplication
 public class DemoApplication {

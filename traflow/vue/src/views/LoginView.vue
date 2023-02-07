@@ -1,5 +1,7 @@
 <template>
-  <div>Login</div>
+  <div style="padding: 10px">
+    <el-button type="primary">Hello</el-button>
+  </div>
 </template>
 
 <script>
